@@ -65,7 +65,7 @@ cp ./.vimrc ~/.
 sudo npm -g install instant-markdown-d
 
 # install autopep8 and jedi
-sudo pip install autopep8 jedi pep8
+sudo pip install autopep8 jedi pep8 flake8
 
 # install plug manager
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -83,4 +83,4 @@ else
     echo "YouCompleteMe plugin is not in list!"
 fi
 
-echo -e "\e[42;34mdeploy finished!\e[0m"
+echo -e "\e[42;34mdeploy vim finished!\e[0m"

@@ -43,13 +43,14 @@ nnoremap <Leader>kw <C-W>k
 nnoremap <Leader>jw <C-W>j
 
 " 定义快捷键在结对符之间跳转
-nmap <Leader>c %
+" nmap <Leader>c %
 
 " 输入%%，自动展开为活动缓冲区所在目录的路径
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 " >> 让配置变更立即生效 <<
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
+
 
 " >>>> 插件安装 <<<<
 " vundle 环境设置
@@ -58,11 +59,17 @@ filetype off
 call plug#begin('~/.vim/plugged')
 
 " 插件管理与主题
+" Plug 'VundleVim/Vundle.vim'
+" Plug 'altercation/vim-colors-solarized'
 Plug 'mojianming/molokai'
+" Plug 'vim-scripts/phd'
 
 " 自动补全
+"Plug 'ervandew/supertab'
 Plug 'Valloric/YouCompleteMe'
 "Plug 'Shougo/neocomplcache.vim'
+" 宏定义补全
+"Plug 'SirVer/ultisnips'
 
 " 语法检测
 Plug 'scrooloose/syntastic'
@@ -99,7 +106,7 @@ Plug 'mbbill/undotree'
 "Plug 'hdima/python-syntax'
 
 " 代码对齐
-" Plug 'godlygeek/tabular'
+Plug 'godlygeek/tabular'
 
 " 状态栏美化工具
 "Plug 'Lokaltog/vim-powerline'
@@ -113,7 +120,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'tell-k/vim-autopep8'
 
 " jedi python 支持
-" Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim'
 
 " git 插件
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -122,7 +129,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'easymotion/vim-easymotion'
 
 " 标志无效空格
-" Plug 'bronson/vim-trailing-whitespace'
+Plug 'bronson/vim-trailing-whitespace'
 
 " 文件查找
 Plug 'kien/ctrlp.vim'
@@ -145,13 +152,13 @@ Plug 't9md/vim-choosewin'
 Plug 'fisadev/FixedTaskList.vim'
 
 " Emmet插件
-" Plug 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim'
 
 " python 配置
-" Plug 'klen/python-mode'
+Plug 'klen/python-mode'
 
 " tab panel
-" Plug 'kien/tabman.vim'
+Plug 'kien/tabman.vim'
 
 " Override configs by directory
 " Plug 'arielrossanigo/dir-configs-override.vim'
@@ -160,12 +167,12 @@ Plug 'fisadev/FixedTaskList.vim'
 Plug 'fisadev/fisa-vim-colorscheme'
 
 " 环境相关
-" Plug 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 
-" Plug 'michaeljsmith/vim-indent-object'
-" Plug 'jeetsukumaran/vim-indentwise'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'jeetsukumaran/vim-indentwise'
 
-" Plug 'basepi/vim-conque'
+Plug 'basepi/vim-conque'
 
 
 " 插件列表结束
@@ -175,7 +182,7 @@ filetype plugin indent on
 " >>>> 插件设置 <<<<
 
 " >> Emmet 设置 <<
-" let g:user_emmet_expandabbr_key = '<C-e>'
+let g:user_emmet_expandabbr_key = '<C-e>'
 
 " >> YoucompleteMe 设置 <<
 " 从第2个键入字符就开始罗列匹配项
@@ -268,8 +275,8 @@ let g:tagbar_sort = 0
 
 " >> nerdtree 配置<<
 " 打开vim启动NERDTree,光标不跳转
-" autocmd vimenter * NERDTree
-" wincmd w
+autocmd vimenter * NERDTree
+wincmd w
 autocmd vimenter * wincmd w
 " open a NERDTree automatically when vim starts up if no files were specified
 autocmd StdinReadPre * let s:std_in=1
@@ -300,24 +307,22 @@ let g:indentLine_noConcealCurcor=""
 " F8 格式化 python 代码
 autocmd FileType python map <buffer> <F8> :call Autopep8()<CR>
 
-" " >> jedi-vim 配置 <<
-" "  make jedi-vim use tabs when going to a definition etc
-" let g:jedi#use_tabs_not_buffers = 1
-" "  automatically starts the completion
-" let g:jedi#popup_on_dot = 0
-" let g:jedi#popup_select_first = 0
-" let g:jedi#show_call_signatures = "1"
+" >> jedi-vim 配置 <<
+"  make jedi-vim use tabs when going to a definition etc
+let g:jedi#use_tabs_not_buffers = 1
+"  automatically starts the completion
+let g:jedi#popup_on_dot = 0
+let g:jedi#popup_select_first = 0
+let g:jedi#show_call_signatures = "1"
 
 " >> Syntastic 语法检测 <<
-" Recommended setting
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
+let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_check_on_open=1
 
 " let g:syntastic_mode_map = {
         " \ "mode": "active",
@@ -327,9 +332,10 @@ let g:syntastic_check_on_open=1
 " set error or warning signs
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_check_on_open=1
 let g:syntastic_enable_highlighting = 0
 "let g:syntastic_python_checker="flake8,pyflakes,pep8,pylint"
-let g:syntastic_python_checkers=['flake8']
+let g:syntastic_python_checkers=['pyflakes']
 "highlight SyntasticErrorSign guifg=white guibg=black
 
 let g:syntastic_cpp_include_dirs = ['/usr/include/']
@@ -490,6 +496,75 @@ let g:choosewin_overlay_enable = 1
 " >> tasklist <<
 map <F10> :TaskList<CR>
 
+" >> Python mode <<
+" > 检测代码 <
+let g:pymode_syntax = 1
+" 开启检测代码
+let g:python_lint = 1
+" 每次保存检测代码
+let g:pymode_lint_on_write = 1
+let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
+" let g:pymode_lint_unmodified = 0
+" let g:pymode_lint_on_fly = 0
+" 关闭警告标签
+" let g:pymode_lint_signs = 0
+" let g:pymode_lint_message = 0
+
+" let g:pymode_lint_todo_symbol = 'WW'
+let g:pymode_lint_comment_symbol = '⚠'
+" let g:pymode_lint_visual_symbol = 'RR'
+let g:pymode_lint_error_symbol = '✗'
+" let g:pymode_lint_info_symbol = 'II'
+" let g:pymode_lint_pyflakes_symbol = 'FF'
+" 忽略的错误
+let g:pymode_lint_ignore = "E501,W"
+let g:pymode_lint_select = "E501,W0011,W430"
+" don't fold python code on open
+let g:pymode_folding = 0
+" don't load rope by default. Change to 1 to use rope
+let g:pymode_rope = 1
+" open definitions on same window, and custom mappings for definitions and
+" occurrences
+" let g:pymode_rope_goto_definition_bind = ',d'
+" let g:pymode_rope_goto_definition_cmd = 'e'
+" nmap ,D :tab split<CR>:PymodePython rope.goto()<CR>
+" nmap ,o :RopeFindOccurrences<CR>
+" setup default python options
+" let g:pymode_options = 1
+" 设置python解析器
+" let g:pymode_python = 'python3'
+let g:pymode_python3 = 'python3'
+" enable pymode-motion
+let g:pymode_motion = 1
+" 设置python doc
+let g:pymode_doc = 0
+let g:pymode_doc_bind = ']'
+" 设置运行python代码
+let g:pymode_run = 1
+let g:python_run_bind = '<leader>r'
+" 设置python断点
+let g:pymode_breakpoint = 1
+let g:python_breakpoint_bind = '<leader>b'
+let g:python_breakpoint_cmd = ''
+" 设置自动补全
+" let g:pymode_rope_copletion = 1
+" 跳转到函数定义处
+" let g:pymode_rope_goto_definition_bind = '<C-c>g'
+" let g:pymode_rope_goto_definition_cmd = 'new'
+" 这支rope
+" let g:pymode_rope = 1
+" let g:pymode_rope_lookup_project = 0
+" 重构
+" let g:pymode_rope_rename_bind = '<C-c>rr'
+" 开启默认配置
+let g:pymode_options = 1
+
+" " >>> TabMan <<<
+" " 调用Tabman
+" let g:tabman_toggle = '<leader>b'
+" " 设置Tabman窗口大小
+" let g:tabman_width = 15
+
 " >>> minibufexpl <<<
 let g:miniBufExplorerAutoStart = 0
 
@@ -518,7 +593,7 @@ set nowritebackup
 set nobackup
 
 " 鼠标
-" set mouse=a
+set mouse=a
 
 " 禁止光标闪烁
 set gcr=a:block-blinkon0
