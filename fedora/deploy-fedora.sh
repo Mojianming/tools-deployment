@@ -96,6 +96,7 @@ source /usr/bin/virtualenvwrapper.sh
 # tmux
 [ -z "$TMUX" ] && export TERM=xterm-256color
 # ps1
+# export PS1="\[\e[33;1m\]\u \[\e[36;1m\]\W\[\e[34;1m\] ➜ \[\e[0m\]"
 # export PS1="\[\e[33;1m\]\u \[\e[36;1m\]\W\[\e[34;1m\] > \[\e[0m\]"
 # show git branch
 export color_prompt=yes
