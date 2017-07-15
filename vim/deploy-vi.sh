@@ -6,7 +6,7 @@ set -e
 
 # check linux distribution
 # DIST=$(lsb_release -i|cut -f2|tr '[A-Z]' '[a-z'])
-DIST=$(cat /etc/*release|grep -E "^ID="|awk -F= '{print $2}'|tr '[A-Z]' '[a-z]')
+DIST=$(cat /etc/*release|grep -E "^ID="|awk -F= '{print $2}'|tr '[A-Z]' '[a-z]'|sed 's/\"//g')
 
 if [ ${DIST} == 'fedora' -o ${DIST} == 'centos' -o ${DIST} == 'redhat' ];then
     echo -e "linux distribution is \e[32;31m${DIST}\e[0m"
@@ -21,7 +21,7 @@ fi
 
 # check vim
 vim --version &> /dev/null
-if [[ $? -eq 0 ]];then
+if [[ ! $? -eq 0 ]];then
     echo -e -n "\e[32;33mWARNING: you don't have installed vim, install vim through the Repositories [Y/N]: \e[0m"
     while true
     do
