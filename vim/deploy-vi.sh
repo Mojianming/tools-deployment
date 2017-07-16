@@ -5,16 +5,11 @@ set -e
 # exec &> install-vim.log
 
 # check linux distribution
-<<<<<<< HEAD
 if $(lsb_release -d &> /dev/null);then
   DIST=$(lsb_release -i|cut -f2|tr '[A-Z]' '[a-z'])
 else
   DIST=$(cat /etc/*release|grep -E "^ID="|awk -F= '{print $2}'|tr '[A-Z]' '[a-z]'| sed 's/\"//g')
 fi
-=======
-# DIST=$(lsb_release -i|cut -f2|tr '[A-Z]' '[a-z'])
-DIST=$(cat /etc/*release|grep -E "^ID="|awk -F= '{print $2}'|tr '[A-Z]' '[a-z]'|sed 's/\"//g')
->>>>>>> fa39ea9dbaf1e6bb7a1db7b2201628fcedd3531d
 
 if [ ${DIST} == 'fedora' -o ${DIST} == 'centos' -o ${DIST} == 'redhat' ];then
     echo -e "linux distribution is \e[32;31m${DIST}\e[0m"
