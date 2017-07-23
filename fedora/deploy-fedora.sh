@@ -50,6 +50,11 @@ fi
 # Add FZUG Repository
 sudo dnf config-manager --add-repo=http://repo.fdzh.org/FZUG/FZUG.repo
 
+# update Repository
+sudo yum clean all
+sudo yum makecache
+sudo yum -y update
+
 # install sogoupinyin
 sudo yum -y install sogoupinyin
 
@@ -71,7 +76,7 @@ sudo yum -y install google-chrome-stable
 sudo yum -y install libreoffice-langpack-zh-Han*
 
 # install unar
-sudo yum -y install unar
+# sudo yum -y install unar
 
 # install the theme
 sudo tar -zxf ./package/theme/OSX-Arc-Darker-v1.3.9.tar.gz -C /usr/share/themes/ >> /dev/null
@@ -80,7 +85,8 @@ sudo tar -zxf ./package/icons/ComixCursors.tgz -C /usr/share/icons
 # install xmind
 
 # python virtualenv
-sudo pip3 install virtualenv virtualenvwrapper
+# sudo pip3 install virtualenv virtualenvwrapper
+sudo pip install virtualenv virtualenvwrapper
 
 # Custom configuration
 cat >> ~/.bashrc << EOF
@@ -103,8 +109,8 @@ export color_prompt=yes
 parse_git_branch(){
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
-if [[ "$color_prompt" == yes ]];then
-  PS1='\[\e[33;1m\]\u \[\e[36;1m\]\W\[\e[01;31m\]$(parse_git_branch)\[\e[34;1m\] > \[\e[0m\]'
+if [[ "\$color_prompt" == yes ]];then
+  PS1='\[\e[33;1m\]\u \[\e[36;1m\]\W\[\e[01;31m\]\$(parse_git_branch)\[\e[34;1m\] > \[\e[0m\]'
 else
   PS1='\[\e[33;1m\]\u \[\e[36;1m\]\W\[\e[34;1m\] > \[\e[0m\]'
 fi
