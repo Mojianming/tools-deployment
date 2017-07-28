@@ -554,9 +554,10 @@ set laststatus=2
 " 显示光标当前位置
 set ruler
 
-" 开启行号显示
+" 显示绝对行号
 set number
-" set relativenumber
+" 显示相对行号
+set relativenumber
 
 " 高亮显示当前行/列
 set cursorline
@@ -640,7 +641,7 @@ func! Title()
        call setline(1,"#! /usr/bin/env python")
        call append(line("."),"# -*-coding=utf-8-*-")
        call append(line(".")+1,"")
-       call append(line(".")+2,"# __author__ = \'".$USER."\'")
+       call append(line(".")+2,"__author__ = \'".$USER."\'")
        call append(line(".")+3,"")
        " call append(line(".")+4,"# TODO: ")
        call append(line(".")+5,"")
